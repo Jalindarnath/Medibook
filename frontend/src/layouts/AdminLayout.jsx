@@ -102,7 +102,7 @@ export const AdminLayout = ({ children }) => {
               </div>
               <div className="min-w-0 flex-1">
                 <div className="text-xs font-bold text-white truncate">
-                  {user?.full_name || 'System Administrator'}
+                  {user?.full_name || 'Dr. Rajesh Kulkarni (Admin)'}
                 </div>
                 <div className="text-[11px] text-slate-400 font-mono truncate">
                   {user?.email || 'admin@medibook.com'}

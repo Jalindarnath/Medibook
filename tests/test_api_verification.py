@@ -65,7 +65,7 @@ class TestUserAuthentication:
     def test_successful_registration(self, client):
         unique_email = f'new_patient_{int(time.time()*1000)}@test.com'
         res = client.post('/api/auth/register', json={
-            'full_name': 'Jane Doe',
+            'full_name': 'Priyanka Patil',
             'email': unique_email,
             'phone': '9876543210',
             'password': 'SecurePassword123!',
@@ -79,7 +79,7 @@ class TestUserAuthentication:
 
     def test_duplicate_email_rejection(self, client):
         res = client.post('/api/auth/register', json={
-            'full_name': 'Duplicate User',
+            'full_name': 'Duplicate Aarav',
             'email': 'patient@medibook.com',  # Default seeded email
             'phone': '9876543210',
             'password': 'Password123!',
@@ -122,7 +122,7 @@ class TestAppointmentBooking:
 
     def test_get_available_slots(self, client):
         tomorrow = (date.today() + timedelta(days=2)).strftime('%Y-%m-%d')
-        res = client.get(f'/api/available-slots?doctor=Dr.+Marcus+Vance+(Cardiologist)&date={tomorrow}')
+        res = client.get(f'/api/available-slots?doctor=Dr.+Milind+Kadam+(Cardiologist)&date={tomorrow}')
         assert res.status_code == 200
         data = res.get_json()
         assert 'available_slots' in data
@@ -134,7 +134,7 @@ class TestAppointmentBooking:
             'patient_name': 'Aarav Deshmukh',
             'phone': '9123456780',
             'category': 'Cardiology',
-            'doctor': 'Dr. Marcus Vance (Cardiologist)',
+            'doctor': 'Dr. Milind Kadam (Cardiologist)',
             'appointment_date': yesterday,
             'appointment_time': '10:00 AM',
             'reason': 'Past date test check'
@@ -148,7 +148,7 @@ class TestAppointmentBooking:
             'patient_name': 'Aarav Deshmukh',
             'phone': '9123456780',
             'category': 'Cardiology',
-            'doctor': 'Dr. Marcus Vance (Cardiologist)',
+            'doctor': 'Dr. Milind Kadam (Cardiologist)',
             'appointment_date': booking_date,
             'appointment_time': '02:00 PM',
             'reason': 'Annual cardiovascular checkup'
@@ -162,10 +162,10 @@ class TestAppointmentBooking:
         booking_date = (date.today() + timedelta(days=15)).strftime('%Y-%m-%d')
         # 1. First booking
         res1 = client.post('/api/appointments', headers=patient_headers, json={
-            'patient_name': 'Patient One',
+            'patient_name': 'Tanvi Kulkarni',
             'phone': '9123456780',
             'category': 'Dental Care',
-            'doctor': 'Dr. Emily Watson (Dental Surgeon)',
+            'doctor': 'Dr. Pooja Deshmukh (Dental Surgeon)',
             'appointment_date': booking_date,
             'appointment_time': '09:00 AM',
             'reason': 'First booking on slot'
@@ -174,10 +174,10 @@ class TestAppointmentBooking:
 
         # 2. Second booking on exact same doctor, date and time
         res2 = client.post('/api/appointments', headers=patient_headers, json={
-            'patient_name': 'Patient Two',
+            'patient_name': 'Siddhesh Shinde',
             'phone': '9876543210',
             'category': 'Dental Care',
-            'doctor': 'Dr. Emily Watson (Dental Surgeon)',
+            'doctor': 'Dr. Pooja Deshmukh (Dental Surgeon)',
             'appointment_date': booking_date,
             'appointment_time': '09:00 AM',
             'reason': 'Conflict booking attempt'
@@ -192,7 +192,7 @@ class TestAppointmentBooking:
             'patient_name': 'Aarav Deshmukh',
             'phone': '9123456780',
             'category': 'Eye Care',
-            'doctor': 'Dr. David Patel (Ophthalmologist)',
+            'doctor': 'Dr. Sneha Patil (Ophthalmologist)',
             'appointment_date': booking_date,
             'appointment_time': '11:00 AM',
             'reason': 'Routine eye check'
@@ -210,7 +210,7 @@ class TestAppointmentBooking:
             'patient_name': 'Aarav Deshmukh',
             'phone': '9123456780',
             'category': 'Eye Care',
-            'doctor': 'Dr. David Patel (Ophthalmologist)',
+            'doctor': 'Dr. Sneha Patil (Ophthalmologist)',
             'appointment_date': booking_date,
             'appointment_time': '11:00 AM',
             'reason': 'Re-booking released slot'

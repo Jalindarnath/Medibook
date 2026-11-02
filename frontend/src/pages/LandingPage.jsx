@@ -27,7 +27,7 @@ export const LandingPage = () => {
       title: 'General Consultation',
       icon: Stethoscope,
       description: 'Comprehensive physical exams, preventative health advice, and diagnosis of common illnesses.',
-      doctor: 'Dr. Sarah Jenkins & Dr. Robert Chen',
+      doctor: 'Dr. Anjali Joshi & Dr. Sachin Kulkarni',
       category: 'General Consultation',
       bg: 'bg-blue-50 text-blue-600',
     },
@@ -35,7 +35,7 @@ export const LandingPage = () => {
       title: 'Dental Care',
       icon: Smile,
       description: 'Teeth cleaning, whitening, cavity treatment, and advanced orthodontic and surgical procedures.',
-      doctor: 'Dr. Emily Watson & Dr. Michael Miller',
+      doctor: 'Dr. Pooja Deshmukh & Dr. Aditya Shinde',
       category: 'Dental Care',
       bg: 'bg-emerald-50 text-emerald-600',
     },
@@ -43,7 +43,7 @@ export const LandingPage = () => {
       title: 'Eye Care',
       icon: Eye,
       description: 'Digital vision examinations, glaucoma screening, cataract evaluations, and corrective prescriptions.',
-      doctor: 'Dr. David Patel & Dr. Sophia Rodriguez',
+      doctor: 'Dr. Sneha Patil & Dr. Rohan Gaikwad',
       category: 'Eye Care',
       bg: 'bg-amber-50 text-amber-600',
     },
@@ -51,7 +51,7 @@ export const LandingPage = () => {
       title: 'Dermatology',
       icon: Sparkles,
       description: 'Clinical skin therapy, acne treatments, allergy management, and cosmetic dermatology.',
-      doctor: 'Dr. Amanda Brooks & Dr. Kevin Vance',
+      doctor: 'Dr. Neha Sawant & Dr. Amit Jadhav',
       category: 'Dermatology',
       bg: 'bg-purple-50 text-purple-600',
     },
@@ -59,7 +59,7 @@ export const LandingPage = () => {
       title: 'Cardiology',
       icon: HeartPulse,
       description: 'Heart disease diagnosis, hypertension care, ECG analysis, and holistic cardiovascular health.',
-      doctor: 'Dr. Marcus Vance & Dr. Elena Rostova',
+      doctor: 'Dr. Milind Kadam & Dr. Tanvi More',
       category: 'Cardiology',
       bg: 'bg-rose-50 text-rose-600',
     },
@@ -173,7 +173,7 @@ export const LandingPage = () => {
                   <div className="flex justify-between items-start">
                     <div>
                       <span className="text-[11px] font-bold text-blue-600 uppercase tracking-wider">Confirmed Booking</span>
-                      <h5 className="font-semibold text-slate-900 text-sm">Dr. Marcus Vance (Cardiologist)</h5>
+                      <h5 className="font-semibold text-slate-900 text-sm">Dr. Milind Kadam (Cardiologist)</h5>
                     </div>
                     <span className="text-xs font-mono font-bold bg-white px-2 py-0.5 rounded border border-slate-200 text-slate-700">
                       MB-10101

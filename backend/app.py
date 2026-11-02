@@ -48,7 +48,7 @@ def seed_database():
     admin = User.query.filter_by(email='admin@medibook.com').first()
     if not admin:
         admin = User(
-            full_name='System Administrator',
+            full_name='Dr. Rajesh Kulkarni (Admin)',
             email='admin@medibook.com',
             phone='9876543210',
             role='admin'
@@ -86,7 +86,7 @@ def seed_database():
                 patient_name='Aarav Deshmukh',
                 phone='9123456780',
                 category='Cardiology',
-                doctor='Dr. Marcus Vance (Cardiologist)',
+                doctor='Dr. Milind Kadam (Cardiologist)',
                 appointment_date=tomorrow.strftime('%Y-%m-%d'),
                 appointment_time='10:00 AM',
                 reason='Routine cardiovascular health checkup and blood pressure monitoring.',
@@ -98,7 +98,7 @@ def seed_database():
                 patient_name='Aarav Deshmukh',
                 phone='9123456780',
                 category='Dental Care',
-                doctor='Dr. Emily Watson (Dental Surgeon)',
+                doctor='Dr. Pooja Deshmukh (Dental Surgeon)',
                 appointment_date=next_week.strftime('%Y-%m-%d'),
                 appointment_time='02:30 PM',
                 reason='Biannual teeth cleaning and dental sensitivity evaluation.',
@@ -110,7 +110,7 @@ def seed_database():
                 patient_name='Aarav Deshmukh',
                 phone='9123456780',
                 category='General Consultation',
-                doctor='Dr. Sarah Jenkins (General Physician)',
+                doctor='Dr. Anjali Joshi (General Physician)',
                 appointment_date=past_date.strftime('%Y-%m-%d'),
                 appointment_time='11:00 AM',
                 reason='Seasonal allergies and throat checkup.',
@@ -122,7 +122,7 @@ def seed_database():
                 patient_name='Aarav Deshmukh',
                 phone='9123456780',
                 category='Eye Care',
-                doctor='Dr. David Patel (Ophthalmologist)',
+                doctor='Dr. Sneha Patil (Ophthalmologist)',
                 appointment_date=tomorrow.strftime('%Y-%m-%d'),
                 appointment_time='04:00 PM',
                 reason='Vision clarity check for new prescription glasses.',

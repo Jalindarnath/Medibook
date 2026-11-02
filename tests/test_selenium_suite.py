@@ -80,7 +80,7 @@ class TestMediBookE2E:
 
         # 2. Fill valid registration data
         timestamp = int(time.time())
-        driver.find_element(By.CSS_SELECTOR, '[data-testid="name-input"]').send_keys(f"Test Patient {timestamp}")
+        driver.find_element(By.CSS_SELECTOR, '[data-testid="name-input"]').send_keys(f"Aarav Deshmukh {timestamp}")
         driver.find_element(By.CSS_SELECTOR, '[data-testid="email-input"]').send_keys(f"patient_{timestamp}@testmedibook.com")
         driver.find_element(By.CSS_SELECTOR, '[data-testid="phone-input"]').send_keys("9876543210")
         driver.find_element(By.CSS_SELECTOR, '[data-testid="password-input"]').send_keys("SecurePass123!")

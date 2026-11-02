@@ -16,24 +16,24 @@ ALL_SLOTS = [
 
 DOCTORS_BY_CATEGORY = {
     "General Consultation": [
-        "Dr. Sarah Jenkins (General Physician)",
-        "Dr. Robert Chen (Family Medicine)"
+        "Dr. Anjali Joshi (General Physician)",
+        "Dr. Sachin Kulkarni (Family Medicine)"
     ],
     "Dental Care": [
-        "Dr. Emily Watson (Dental Surgeon)",
-        "Dr. Michael Miller (Orthodontist)"
+        "Dr. Pooja Deshmukh (Dental Surgeon)",
+        "Dr. Aditya Shinde (Orthodontist)"
     ],
     "Eye Care": [
-        "Dr. David Patel (Ophthalmologist)",
-        "Dr. Sophia Rodriguez (Optometrist)"
+        "Dr. Sneha Patil (Ophthalmologist)",
+        "Dr. Rohan Gaikwad (Optometrist)"
     ],
     "Dermatology": [
-        "Dr. Amanda Brooks (Dermatologist)",
-        "Dr. Kevin Vance (Cosmetic Specialist)"
+        "Dr. Neha Sawant (Dermatologist)",
+        "Dr. Amit Jadhav (Cosmetic Specialist)"
     ],
     "Cardiology": [
-        "Dr. Marcus Vance (Cardiologist)",
-        "Dr. Elena Rostova (Heart Specialist)"
+        "Dr. Milind Kadam (Cardiologist)",
+        "Dr. Tanvi More (Heart Specialist)"
     ]
 }
 
