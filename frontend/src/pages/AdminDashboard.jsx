@@ -15,17 +15,13 @@ import {
   X,
   Eye,
   RefreshCw,
-  RotateCcw,
   AlertCircle,
   CheckCheck,
   User,
-  Phone,
-  Database,
-  ArrowRight
+  Phone
 } from 'lucide-react';
 
 export const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState('overview');
   const [stats, setStats] = useState({
     total_users: 0,
     total_appointments: 0,
@@ -45,7 +41,6 @@ export const AdminDashboard = () => {
   // Modals & Action States
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [actionLoadingId, setActionLoadingId] = useState(null);
-  const [resettingDb, setResettingDb] = useState(false);
 
   const fetchDashboardData = async () => {
     setLoading(true);
@@ -94,26 +89,8 @@ export const AdminDashboard = () => {
     }
   };
 
-  const handleResetDatabase = async () => {
-    if (!window.confirm('Are you sure you want to reset and reseed the test database for STQA automated testing?')) {
-      return;
-    }
-    setResettingDb(true);
-    setError('');
-    try {
-      const res = await adminService.resetTestDatabase();
-      setSuccessMessage(res.data.message || 'Database successfully reset.');
-      fetchDashboardData();
-      setTimeout(() => setSuccessMessage(''), 4000);
-    } catch (err) {
-      setError(err.response?.data?.error || 'Failed to reset database.');
-    } finally {
-      setResettingDb(false);
-    }
-  };
-
   return (
-    <AdminLayout activeTab={activeTab} onTabChange={setActiveTab}>
+    <AdminLayout>
       <div className="space-y-8 max-w-7xl mx-auto">
         
         {/* Top Header Banner */}
@@ -127,7 +104,7 @@ export const AdminDashboard = () => {
               Hospital Operations & Appointments
             </h1>
             <p className="text-slate-400 text-sm mt-1">
-              Real-time schedule oversight, slot validation, patient verification, and STQA test reset.
+              Real-time schedule oversight, slot validation, and patient appointment management.
             </p>
           </div>
 
@@ -139,19 +116,6 @@ export const AdminDashboard = () => {
               className="p-2.5 rounded-xl border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white bg-slate-800 transition cursor-pointer"
             >
               <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-            </button>
-
-            <button
-              type="button"
-              id="admin-reset-db-button"
-              data-testid="admin-reset-db-button"
-              onClick={handleResetDatabase}
-              disabled={resettingDb}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-rose-800/80 bg-rose-950/60 hover:bg-rose-900 text-rose-300 hover:text-rose-100 text-xs font-semibold transition cursor-pointer shadow-xs"
-              title="Reset and reseed database for test automation"
-            >
-              <RotateCcw className={`w-3.5 h-3.5 ${resettingDb ? 'animate-spin' : ''}`} />
-              <span>{resettingDb ? 'Resetting...' : 'Reset Test DB'}</span>
             </button>
           </div>
         </div>
@@ -176,7 +140,7 @@ export const AdminDashboard = () => {
           </div>
         )}
 
-        {/* 5 Admin Statistics Cards (Always accessible to tests) */}
+        {/* 5 Admin Statistics Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           
           {/* Total Users */}
@@ -271,247 +235,207 @@ export const AdminDashboard = () => {
 
         </div>
 
-        {/* Tab: System & Test Database */}
-        {activeTab === 'system' && (
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
-            <div className="flex items-center gap-3 pb-4 border-b border-slate-200">
-              <div className="p-3 bg-rose-50 text-rose-600 rounded-xl">
-                <Database className="w-6 h-6" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">STQA Automation Database Manager</h2>
-                <p className="text-xs text-slate-500">Baseline database reset tool for reproducible Selenium and Pytest test runs.</p>
-              </div>
-            </div>
+        {/* Filter and Search Bar */}
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col lg:flex-row gap-4 justify-between items-center">
+          
+          {/* Search */}
+          <form onSubmit={handleSearchSubmit} className="w-full lg:w-80 relative">
+            <input
+              id="admin-search"
+              name="admin-search"
+              type="text"
+              data-testid="admin-search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search patient, doctor, phone, ID..."
+              className="w-full pl-10 pr-20 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3 pointer-events-none" />
+            <button
+              type="submit"
+              className="absolute right-1.5 top-1.5 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-xs font-semibold transition cursor-pointer"
+            >
+              Search
+            </button>
+          </form>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-800 space-y-1">
-              <p className="font-bold">Automated Test Isolation Notice:</p>
-              <p>Executing a test database reset flushes volatile patient bookings and restores the system to baseline state with the default Administrator and sample verification appointments.</p>
-            </div>
-
-            <div className="flex items-center justify-between pt-2">
-              <div>
-                <span className="text-sm font-semibold text-slate-900 block">Baseline Reseed</span>
-                <span className="text-xs text-slate-500">Reinitializes tables and seeds default test fixtures.</span>
-              </div>
-              <button
-                type="button"
-                onClick={handleResetDatabase}
-                disabled={resettingDb}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold transition shadow-sm cursor-pointer disabled:opacity-60"
-              >
-                <RotateCcw className={`w-4 h-4 ${resettingDb ? 'animate-spin' : ''}`} />
-                <span>{resettingDb ? 'Resetting DB...' : 'Trigger Database Reset'}</span>
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Filter and Search Bar (Active for Overview and Appointments tabs) */}
-        {activeTab !== 'system' && (
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col lg:flex-row gap-4 justify-between items-center">
-            
-            {/* Search */}
-            <form onSubmit={handleSearchSubmit} className="w-full lg:w-80 relative">
+          {/* Filter controls */}
+          <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+            {/* Date Filter */}
+            <div className="flex items-center gap-1.5 text-xs text-slate-600">
+              <span className="font-semibold">Date:</span>
               <input
-                id="admin-search"
-                name="admin-search"
-                type="text"
-                data-testid="admin-search-input"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search patient, doctor, phone, ID..."
-                className="w-full pl-10 pr-20 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                id="admin-date-filter"
+                type="date"
+                data-testid="admin-date-filter"
+                value={dateFilter}
+                onChange={(e) => setDateFilter(e.target.value)}
+                className="px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-800 bg-white"
               />
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3 pointer-events-none" />
-              <button
-                type="submit"
-                className="absolute right-1.5 top-1.5 px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-xs font-semibold transition cursor-pointer"
-              >
-                Search
-              </button>
-            </form>
-
-            {/* Filter controls */}
-            <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-              {/* Date Filter */}
-              <div className="flex items-center gap-1.5 text-xs text-slate-600">
-                <span className="font-semibold">Date:</span>
-                <input
-                  id="admin-date-filter"
-                  type="date"
-                  data-testid="admin-date-filter"
-                  value={dateFilter}
-                  onChange={(e) => setDateFilter(e.target.value)}
-                  className="px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-800 bg-white"
-                />
-                {dateFilter && (
-                  <button
-                    type="button"
-                    onClick={() => setDateFilter('')}
-                    className="text-slate-400 hover:text-slate-600 text-xs underline cursor-pointer"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-
-              {/* Status Filter */}
-              <div className="flex items-center gap-1.5 text-xs text-slate-600">
-                <span className="font-semibold">Status:</span>
-                <select
-                  id="admin-status-filter"
-                  data-testid="admin-status-filter"
-                  value={statusFilter}
-                  onChange={(e) => setStatusFilter(e.target.value)}
-                  className="px-3 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+              {dateFilter && (
+                <button
+                  type="button"
+                  onClick={() => setDateFilter('')}
+                  className="text-slate-400 hover:text-slate-600 text-xs underline cursor-pointer"
                 >
-                  <option value="all">All Statuses</option>
-                  <option value="pending">Pending</option>
-                  <option value="confirmed">Confirmed</option>
-                  <option value="completed">Completed</option>
-                  <option value="cancelled">Cancelled</option>
-                </select>
-              </div>
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {/* Status Filter */}
+            <div className="flex items-center gap-1.5 text-xs text-slate-600">
+              <span className="font-semibold">Status:</span>
+              <select
+                id="admin-status-filter"
+                data-testid="admin-status-filter"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="px-3 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+              >
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
             </div>
           </div>
-        )}
+        </div>
 
         {/* Admin Appointments Table */}
-        {activeTab !== 'system' && (
-          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-            {loading ? (
-              <div className="py-20 text-center">
-                <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto"></div>
-                <p className="text-xs text-slate-500 mt-3 font-medium">Fetching clinic appointments...</p>
-              </div>
-            ) : appointments.length === 0 ? (
-              <div className="py-16 text-center space-y-2">
-                <Calendar className="w-10 h-10 text-slate-300 mx-auto" />
-                <h4 className="font-bold text-slate-800 text-sm">No appointment records match filters</h4>
-                <p className="text-xs text-slate-500">Try adjusting your date, status, or search query.</p>
-              </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm text-slate-600" id="admin-appointments-table">
-                  <thead className="bg-slate-50 text-slate-700 font-semibold text-xs uppercase tracking-wider border-b border-slate-200">
-                    <tr>
-                      <th className="py-3.5 px-4">Ref ID</th>
-                      <th className="py-3.5 px-4">Patient Information</th>
-                      <th className="py-3.5 px-4">Doctor & Department</th>
-                      <th className="py-3.5 px-4">Schedule</th>
-                      <th className="py-3.5 px-4">Status</th>
-                      <th className="py-3.5 px-4 text-right">Admin Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {appointments.map((app) => (
-                      <tr
-                        key={app.id}
-                        id={`admin-app-${app.id}`}
-                        data-testid={`admin-appointment-row-${app.id}`}
-                        className="hover:bg-slate-50/70 transition"
-                      >
-                        {/* ID */}
-                        <td className="py-4 px-4 font-mono font-bold text-slate-900 text-xs">
-                          {app.id}
-                        </td>
+        <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+          {loading ? (
+            <div className="py-20 text-center">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto"></div>
+              <p className="text-xs text-slate-500 mt-3 font-medium">Fetching clinic appointments...</p>
+            </div>
+          ) : appointments.length === 0 ? (
+            <div className="py-16 text-center space-y-2">
+              <Calendar className="w-10 h-10 text-slate-300 mx-auto" />
+              <h4 className="font-bold text-slate-800 text-sm">No appointment records match filters</h4>
+              <p className="text-xs text-slate-500">Try adjusting your date, status, or search query.</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm text-slate-600" id="admin-appointments-table">
+                <thead className="bg-slate-50 text-slate-700 font-semibold text-xs uppercase tracking-wider border-b border-slate-200">
+                  <tr>
+                    <th className="py-3.5 px-4">Ref ID</th>
+                    <th className="py-3.5 px-4">Patient Information</th>
+                    <th className="py-3.5 px-4">Doctor & Department</th>
+                    <th className="py-3.5 px-4">Schedule</th>
+                    <th className="py-3.5 px-4">Status</th>
+                    <th className="py-3.5 px-4 text-right">Admin Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {appointments.map((app) => (
+                    <tr
+                      key={app.id}
+                      id={`admin-app-${app.id}`}
+                      data-testid={`admin-appointment-row-${app.id}`}
+                      className="hover:bg-slate-50/70 transition"
+                    >
+                      {/* ID */}
+                      <td className="py-4 px-4 font-mono font-bold text-slate-900 text-xs">
+                        {app.id}
+                      </td>
 
-                        {/* Patient */}
-                        <td className="py-4 px-4">
-                          <div className="font-semibold text-slate-900">{app.patient_name}</div>
-                          <div className="text-xs font-mono text-slate-500">{app.phone}</div>
-                        </td>
+                      {/* Patient */}
+                      <td className="py-4 px-4">
+                        <div className="font-semibold text-slate-900">{app.patient_name}</div>
+                        <div className="text-xs font-mono text-slate-500">{app.phone}</div>
+                      </td>
 
-                        {/* Doctor & Category */}
-                        <td className="py-4 px-4">
-                          <div className="font-medium text-slate-900">{app.doctor}</div>
-                          <div className="text-xs text-slate-500">{app.category}</div>
-                        </td>
+                      {/* Doctor & Category */}
+                      <td className="py-4 px-4">
+                        <div className="font-medium text-slate-900">{app.doctor}</div>
+                        <div className="text-xs text-slate-500">{app.category}</div>
+                      </td>
 
-                        {/* Schedule */}
-                        <td className="py-4 px-4">
-                          <div className="text-xs font-semibold text-slate-900">{app.appointment_date}</div>
-                          <div className="text-xs text-slate-500">{app.appointment_time}</div>
-                        </td>
+                      {/* Schedule */}
+                      <td className="py-4 px-4">
+                        <div className="text-xs font-semibold text-slate-900">{app.appointment_date}</div>
+                        <div className="text-xs text-slate-500">{app.appointment_time}</div>
+                      </td>
 
-                        {/* Status */}
-                        <td className="py-4 px-4">
-                          <StatusBadge status={app.status} />
-                        </td>
+                      {/* Status */}
+                      <td className="py-4 px-4">
+                        <StatusBadge status={app.status} />
+                      </td>
 
-                        {/* Action Controls */}
-                        <td className="py-4 px-4 text-right">
-                          <div className="inline-flex items-center gap-1.5">
-                            
-                            {/* View Details */}
+                      {/* Action Controls */}
+                      <td className="py-4 px-4 text-right">
+                        <div className="inline-flex items-center gap-1.5">
+                          
+                          {/* View Details */}
+                          <button
+                            type="button"
+                            onClick={() => setSelectedAppointment(app)}
+                            data-testid={`admin-view-${app.id}`}
+                            title="View Details"
+                            className="p-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md transition cursor-pointer"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </button>
+
+                          {/* Approve Button (when pending) */}
+                          {app.status === 'pending' && (
                             <button
                               type="button"
-                              onClick={() => setSelectedAppointment(app)}
-                              data-testid={`admin-view-${app.id}`}
-                              title="View Details"
-                              className="p-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md transition cursor-pointer"
+                              onClick={() => handleStatusChange(app.id, 'confirmed')}
+                              id={`approve-btn-${app.id}`}
+                              data-testid={`approve-btn-${app.id}`}
+                              disabled={actionLoadingId === app.id}
+                              title="Approve Appointment"
+                              className="inline-flex items-center gap-1 text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1.5 rounded-lg transition shadow-xs cursor-pointer"
                             >
-                              <Eye className="w-4 h-4" />
+                              <Check className="w-3.5 h-3.5" />
+                              <span>Approve</span>
                             </button>
+                          )}
 
-                            {/* Approve Button (when pending) */}
-                            {app.status === 'pending' && (
-                              <button
-                                type="button"
-                                onClick={() => handleStatusChange(app.id, 'confirmed')}
-                                id={`approve-btn-${app.id}`}
-                                data-testid={`approve-btn-${app.id}`}
-                                disabled={actionLoadingId === app.id}
-                                title="Approve Appointment"
-                                className="inline-flex items-center gap-1 text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1.5 rounded-lg transition shadow-xs cursor-pointer"
-                              >
-                                <Check className="w-3.5 h-3.5" />
-                                <span>Approve</span>
-                              </button>
-                            )}
+                          {/* Reject Button (when pending or confirmed) */}
+                          {(app.status === 'pending' || app.status === 'confirmed') && (
+                            <button
+                              type="button"
+                              onClick={() => handleStatusChange(app.id, 'cancelled')}
+                              id={`reject-btn-${app.id}`}
+                              data-testid={`reject-btn-${app.id}`}
+                              disabled={actionLoadingId === app.id}
+                              title="Reject/Cancel Appointment"
+                              className="inline-flex items-center gap-1 text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-2 py-1.5 rounded-lg transition cursor-pointer"
+                            >
+                              <X className="w-3.5 h-3.5" />
+                              <span>Reject</span>
+                            </button>
+                          )}
 
-                            {/* Reject Button (when pending or confirmed) */}
-                            {(app.status === 'pending' || app.status === 'confirmed') && (
-                              <button
-                                type="button"
-                                onClick={() => handleStatusChange(app.id, 'cancelled')}
-                                id={`reject-btn-${app.id}`}
-                                data-testid={`reject-btn-${app.id}`}
-                                disabled={actionLoadingId === app.id}
-                                title="Reject/Cancel Appointment"
-                                className="inline-flex items-center gap-1 text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-2 py-1.5 rounded-lg transition cursor-pointer"
-                              >
-                                <X className="w-3.5 h-3.5" />
-                                <span>Reject</span>
-                              </button>
-                            )}
-
-                            {/* Complete Button (when confirmed) */}
-                            {app.status === 'confirmed' && (
-                              <button
-                                type="button"
-                                onClick={() => handleStatusChange(app.id, 'completed')}
-                                id={`complete-btn-${app.id}`}
-                                data-testid={`complete-btn-${app.id}`}
-                                disabled={actionLoadingId === app.id}
-                                title="Mark as Completed"
-                                className="inline-flex items-center gap-1 text-xs font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-2 py-1.5 rounded-lg transition cursor-pointer"
-                              >
-                                <CheckCheck className="w-3.5 h-3.5" />
-                                <span>Complete</span>
-                              </button>
-                            )}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        )}
+                          {/* Complete Button (when confirmed) */}
+                          {app.status === 'confirmed' && (
+                            <button
+                              type="button"
+                              onClick={() => handleStatusChange(app.id, 'completed')}
+                              id={`complete-btn-${app.id}`}
+                              data-testid={`complete-btn-${app.id}`}
+                              disabled={actionLoadingId === app.id}
+                              title="Mark as Completed"
+                              className="inline-flex items-center gap-1 text-xs font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-2 py-1.5 rounded-lg transition cursor-pointer"
+                            >
+                              <CheckCheck className="w-3.5 h-3.5" />
+                              <span>Complete</span>
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
 
         {/* Patient & Appointment Details Modal */}
         {selectedAppointment && (

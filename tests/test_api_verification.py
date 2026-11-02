@@ -131,7 +131,7 @@ class TestAppointmentBooking:
     def test_booking_past_date_rejected(self, client, patient_headers):
         yesterday = (date.today() - timedelta(days=1)).strftime('%Y-%m-%d')
         res = client.post('/api/appointments', headers=patient_headers, json={
-            'patient_name': 'John Doe',
+            'patient_name': 'Aarav Deshmukh',
             'phone': '9123456780',
             'category': 'Cardiology',
             'doctor': 'Dr. Marcus Vance (Cardiologist)',
@@ -145,7 +145,7 @@ class TestAppointmentBooking:
     def test_successful_booking(self, client, patient_headers):
         booking_date = (date.today() + timedelta(days=14)).strftime('%Y-%m-%d')
         res = client.post('/api/appointments', headers=patient_headers, json={
-            'patient_name': 'John Doe',
+            'patient_name': 'Aarav Deshmukh',
             'phone': '9123456780',
             'category': 'Cardiology',
             'doctor': 'Dr. Marcus Vance (Cardiologist)',
@@ -189,7 +189,7 @@ class TestAppointmentBooking:
         booking_date = (date.today() + timedelta(days=16)).strftime('%Y-%m-%d')
         # 1. Book
         res = client.post('/api/appointments', headers=patient_headers, json={
-            'patient_name': 'John Doe',
+            'patient_name': 'Aarav Deshmukh',
             'phone': '9123456780',
             'category': 'Eye Care',
             'doctor': 'Dr. David Patel (Ophthalmologist)',
@@ -207,7 +207,7 @@ class TestAppointmentBooking:
 
         # 3. Verify slot is released and re-bookable
         rebook_res = client.post('/api/appointments', headers=patient_headers, json={
-            'patient_name': 'John Doe',
+            'patient_name': 'Aarav Deshmukh',
             'phone': '9123456780',
             'category': 'Eye Care',
             'doctor': 'Dr. David Patel (Ophthalmologist)',

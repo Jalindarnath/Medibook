@@ -253,7 +253,7 @@ export const BookAppointment = () => {
                     data-testid="name-input"
                     value={formData.patient_name}
                     onChange={handleChange}
-                    placeholder="Enter patient's full name"
+                    placeholder="e.g. Aarav Deshmukh"
                     className="block w-full pl-10 pr-3 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                   />
                 </div>

@@ -197,7 +197,7 @@ To reset the database at any point during testing:
 | Role | Email | Password | Access Level |
 |---|---|---|---|
 | **System Administrator** | `admin@medibook.com` | `AdminPassword123!` | Full Admin Portal (`/admin`), Status Management, DB Reset |
-| **Test Patient** | `patient@medibook.com` | `Patient123!` | Patient Portal (`/dashboard`, `/book`, `/my-appointments`) |
+| **Test Patient** | `patient@medibook.com` (Aarav Deshmukh) | `Patient123!` | Patient Portal (`/dashboard`, `/book`, `/my-appointments`) |
 
 ---
 

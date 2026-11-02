@@ -62,7 +62,7 @@ def seed_database():
     patient = User.query.filter_by(email='patient@medibook.com').first()
     if not patient:
         patient = User(
-            full_name='John Doe',
+            full_name='Aarav Deshmukh',
             email='patient@medibook.com',
             phone='9123456780',
             role='patient'
@@ -83,7 +83,7 @@ def seed_database():
             Appointment(
                 id='MB-10101',
                 user_id=patient.id,
-                patient_name='John Doe',
+                patient_name='Aarav Deshmukh',
                 phone='9123456780',
                 category='Cardiology',
                 doctor='Dr. Marcus Vance (Cardiologist)',
@@ -95,7 +95,7 @@ def seed_database():
             Appointment(
                 id='MB-10102',
                 user_id=patient.id,
-                patient_name='John Doe',
+                patient_name='Aarav Deshmukh',
                 phone='9123456780',
                 category='Dental Care',
                 doctor='Dr. Emily Watson (Dental Surgeon)',
@@ -107,7 +107,7 @@ def seed_database():
             Appointment(
                 id='MB-10103',
                 user_id=patient.id,
-                patient_name='John Doe',
+                patient_name='Aarav Deshmukh',
                 phone='9123456780',
                 category='General Consultation',
                 doctor='Dr. Sarah Jenkins (General Physician)',
@@ -119,7 +119,7 @@ def seed_database():
             Appointment(
                 id='MB-10104',
                 user_id=patient.id,
-                patient_name='John Doe',
+                patient_name='Aarav Deshmukh',
                 phone='9123456780',
                 category='Eye Care',
                 doctor='Dr. David Patel (Ophthalmologist)',

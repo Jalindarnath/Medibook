@@ -1,38 +1,25 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   Activity,
   Shield,
   LayoutDashboard,
-  Calendar,
-  Users,
-  Database,
   LogOut,
-  ExternalLink,
   Menu,
   X,
-  HeartPulse,
-  Bell
+  HeartPulse
 } from 'lucide-react';
 
-export const AdminLayout = ({ children, activeTab = 'overview', onTabChange }) => {
+export const AdminLayout = ({ children }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = async () => {
     await logout();
     navigate('/login');
   };
-
-  const navItems = [
-    { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard },
-    { id: 'appointments', label: 'All Appointments', icon: Calendar },
-    { id: 'patients', label: 'Patient Registry', icon: Users },
-    { id: 'system', label: 'STQA Test Database', icon: Database },
-  ];
 
   return (
     <div className="min-h-screen flex bg-slate-100 text-slate-900 font-sans antialiased">
@@ -83,41 +70,18 @@ export const AdminLayout = ({ children, activeTab = 'overview', onTabChange }) =
               Administration
             </div>
 
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isSelected = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  data-testid={`admin-nav-${item.id}`}
-                  onClick={() => {
-                    if (onTabChange) onTabChange(item.id);
-                    setSidebarOpen(false);
-                  }}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition cursor-pointer text-left ${
-                    isSelected
-                      ? 'bg-blue-600 text-white shadow-sm'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 flex-shrink-0" />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
+            <button
+              type="button"
+              data-testid="admin-nav-overview"
+              className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition cursor-pointer text-left bg-blue-600 text-white shadow-sm"
+            >
+              <LayoutDashboard className="w-4 h-4 flex-shrink-0" />
+              <span>Dashboard Overview</span>
+            </button>
 
             <div className="pt-6 px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
               Quick Shortcuts
             </div>
-
-            <Link
-              to="/"
-              className="flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition"
-            >
-              <ExternalLink className="w-4 h-4 text-slate-400" />
-              <span>Public Website</span>
-            </Link>
 
             <Link
               to="/dashboard"
@@ -138,7 +102,7 @@ export const AdminLayout = ({ children, activeTab = 'overview', onTabChange }) =
               </div>
               <div className="min-w-0 flex-1">
                 <div className="text-xs font-bold text-white truncate">
-                  {user?.full_name || 'Admin'}
+                  {user?.full_name || 'System Administrator'}
                 </div>
                 <div className="text-[11px] text-slate-400 font-mono truncate">
                   {user?.email || 'admin@medibook.com'}
@@ -175,20 +139,14 @@ export const AdminLayout = ({ children, activeTab = 'overview', onTabChange }) =
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
               <span>Admin Center</span>
               <span>/</span>
-              <span className="text-slate-900 capitalize font-bold">
-                {activeTab}
+              <span className="text-slate-900 font-bold">
+                Dashboard Overview
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-4 text-xs font-medium text-slate-600">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-800 rounded-full border border-emerald-200">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Live SQLite Connected</span>
-            </div>
-
-            <span className="hidden md:inline text-slate-400">|</span>
-            <span className="hidden md:inline font-mono">
+            <span className="font-mono">
               Role: <strong className="text-blue-600 uppercase font-bold">ADMIN</strong>
             </span>
           </div>
@@ -204,4 +162,3 @@ export const AdminLayout = ({ children, activeTab = 'overview', onTabChange }) =
 };
 
 export default AdminLayout;
-
