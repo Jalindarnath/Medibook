@@ -16,7 +16,7 @@ def create_app():
     os.makedirs(instance_dir, exist_ok=True)
     db_path = os.path.join(instance_dir, 'medibook.db')
 
-    app.config['SECRET_KEY'] = 'medibook-super-secret-key-stqa-2026'
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
