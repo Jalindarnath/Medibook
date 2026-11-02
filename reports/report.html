@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MediBook STQA Test Execution Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans p-8">
+    <div class="max-w-5xl mx-auto space-y-6">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex justify-between items-center">
+            <div>
+                <span class="text-blue-600 font-bold text-xs uppercase tracking-wider">Software Testing & Quality Assurance</span>
+                <h1 class="text-2xl font-black text-slate-900 mt-1">MediBook System Test Execution Report</h1>
+                <p class="text-slate-500 text-xs mt-0.5">Execution Date: 2026-11-02 02:12:31 | Environment: Python 3.13 / Pytest</p>
+            </div>
+            <div class="text-right">
+                <span class="px-3 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-800 border border-emerald-200">100% ALL TESTS PASSED</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4">
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-xs text-slate-400 font-semibold uppercase">Total Tests</div>
+                <div class="text-2xl font-extrabold text-slate-900 mt-1">20</div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-xs text-slate-400 font-semibold uppercase">Passed</div>
+                <div class="text-2xl font-extrabold text-emerald-600 mt-1">20</div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-xs text-slate-400 font-semibold uppercase">Failures / Errors</div>
+                <div class="text-2xl font-extrabold text-rose-600 mt-1">0</div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-xs text-slate-400 font-semibold uppercase">Duration</div>
+                <div class="text-2xl font-extrabold text-blue-600 mt-1">2.02s</div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-4 border-b border-slate-200 bg-slate-50 font-bold text-sm text-slate-800">
+                Automated Test Verification Matrix
+            </div>
+            <table class="w-full text-left text-sm">
+                <thead class="bg-slate-50 text-slate-600 text-xs uppercase font-semibold border-b border-slate-200">
+                    <tr>
+                        <th class="py-3 px-4">Test Suite</th>
+                        <th class="py-3 px-4">Test Case Name</th>
+                        <th class="py-3 px-4">Status</th>
+                        <th class="py-3 px-4">Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestHealthCheck</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_health_endpoint</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.028s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestUserAuthentication</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_registration_validation_missing_fields</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.001s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestUserAuthentication</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_registration_validation_invalid_email</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.001s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestUserAuthentication</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_registration_validation_invalid_phone</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.001s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestUserAuthentication</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_registration_validation_short_password</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.001s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestUserAuthentication</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_registration_validation_password_mismatch</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.001s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestUserAuthentication</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_successful_registration</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.141s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestUserAuthentication</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_duplicate_email_rejection</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.004s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestUserAuthentication</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_login_success</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.224s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestUserAuthentication</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_login_invalid_credentials</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.164s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestUserAuthentication</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_protected_me_route</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.163s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestAppointmentBooking</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_get_categories_and_doctors</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.002s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestAppointmentBooking</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_get_available_slots</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.006s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestAppointmentBooking</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_booking_past_date_rejected</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.195s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestAppointmentBooking</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_successful_booking</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.198s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestAppointmentBooking</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_duplicate_slot_booking_prevention</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.193s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestAppointmentBooking</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_cancellation_and_slot_release</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.218s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestAdminModuleAndRBAC</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_patient_blocked_from_admin_portal</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.127s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestAdminModuleAndRBAC</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_admin_dashboard_metrics</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.151s</td>
+        </tr>
+        
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">TestAdminModuleAndRBAC</td>
+            <td class="py-3 px-4 font-semibold text-slate-800 text-xs">test_admin_status_update</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Passed</span></td>
+            <td class="py-3 px-4 font-mono text-xs text-slate-500">0.146s</td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

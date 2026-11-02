@@ -1,0 +1,9 @@
+Flask==3.0.3
+Flask-Cors==4.0.1
+Flask-SQLAlchemy==3.1.1
+Werkzeug==3.0.3
+PyJWT==2.8.0
+pytest==8.3.2
+requests==2.32.3
+selenium==4.26.1
+pytest-html==4.1.1
